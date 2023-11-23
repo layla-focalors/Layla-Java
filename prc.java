@@ -10,4 +10,3 @@ public class prc {
         System.out.printf("%s == %s : %b", str3, str4, (str3 == str4));
     }
 }
-
