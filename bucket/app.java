@@ -11,23 +11,51 @@ package bucket;
 // CardManager 클래스
 
 interface Cardable {
-    int payCard();
-    int CheckCardInfo();
+    public abstract int payCard();
+    public abstract int CheckCardInfo();
 }
 
-class Card {
+class Card implements Cardable{
     final String card_number;
     String owner;
     String passwd;
+    public int payCard(){
+        return 0;
+    }
+    public int CheckCardInfo(){
+        return 0;
+    }
 }
-class CreditCard {
-
+class CreditCard extends Card {
+    public int payCard(){
+        return 0;
+    }
+    public int CheckCardInfo(){
+        return 0;
+    }
 }
-class CheckCard {
-
+class CheckCard extends Card {
+    public int payCard(){
+        return 0;
+    }
+    public int CheckCardInfo(){
+        return 0;
+    }
 }
-class MemberShipCard {
+class MemberShipCard extends Card {
+    public int payCard(){
+        return 0;
+    }
+    public int CheckCardInfo(){
+        return 0;
+    }
+}
 
+class CardManager {
+    Card[] mycard;
+    CardManager(int limit_card){
+        
+    }
 }
 
 public class app {
