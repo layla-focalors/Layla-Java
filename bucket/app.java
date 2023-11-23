@@ -54,7 +54,7 @@ class MemberShipCard extends Card {
 class CardManager {
     Card[] mycard;
     CardManager(int limit_card){
-        
+        this.mycard = new Card[limit_card];
     }
 }
 
