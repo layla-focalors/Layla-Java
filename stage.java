@@ -1,5 +1,7 @@
 class Layla {
-
+    public String toString() {
+        return "Layla is cute";
+    }
 }
 
 public class stage {
