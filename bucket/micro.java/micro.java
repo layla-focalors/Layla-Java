@@ -1,3 +1,5 @@
+import javax.smartcardio.Card;
+
 /**
  * Cardable
  */
@@ -33,7 +35,12 @@ class CheckCard extends Card {
 }
 
 class CardManager {
-
+    Card[] card;
+    int card_count;
+    CardManager(int limit_count){
+        this.card_count = 0;
+        this.card = new Card[limit_count];
+    }
 }
 
 public class micro {
