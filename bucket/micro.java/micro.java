@@ -56,6 +56,10 @@ class Card implements Cardable {
         this.history = new UseHistoryEntity[100];
     }
 
+    String GetCardNumber(){
+        return this.card_number;
+    }
+
 
     public int payCard(String payment_title, int payment){return 0;}
     // 카드 결제 메서드
@@ -91,24 +95,34 @@ class CreditCard extends Card {
         this.annual_fee = annual_fee;
         this.total_trans_fee = 0;
     }
-    public int payCard(String payment_title, int payment){return 0;}
+    public int payCard(String payment_title, int payment){
+        if(this.total_amount_used + payment > this.limit_amount){
+            // 분기 : 1-0-001b-192-card-2A-CP : 한도 초과인 경우
+            System.out.println("한도 초과입니다.");
+        }else {
+            // 분기 : 0-1-000b-129-card-1A : 한도 초과가 아닌 경우
+            this.history[this.payment_no] = new UseHistoryEntity(payment_title, payment);
+            this.payment_no ++;
+
+            // 전체 금액 갱신
+            this.total_amount_used += payment;
+            System.out.printf("-> %s(%d원) - %s번 신용카드로 결제\n",
+            payment_title,
+            payment,
+            this.GetCardNumber()
+            );
+        }
+        return 0;
+    }
     // 카드 결제 메서드
     public int payTrans(int fee) {
+        this.total_trans_fee += fee;
+        System.out.printf("-> 교통카드 %d원 사용 ( 누적 : %d원 )\n", fee, this.total_trans_fee);
         return 0;
     }
     public void printCardInfo(){
     }
     // 카드의 정보 출력
-    public void printCardHistory(){
-        System.out.println("------------ 카드 정보 출력 내용 ------------");
-        for(int i = 0; i < this.payment_no; i++){
-            System.out.printf("사용내역(%d번째) : [%s][%d원]\n",
-            i + 1,
-            this.history[i].use_history_str,
-            this.history[i].use_history_int
-            );
-        }
-    }
 }
 class CheckCard extends Card {
     int deposit;
@@ -121,10 +135,32 @@ class CheckCard extends Card {
         this.deposit = deposit;
         this.total_trans_fee = 0;
     }
+
+    public int payCard(String payment_title, int payment){
+        if(this.total_amount_used + payment > this.deposit){
+            // 분기 : 1-0-001b-192-card-2A-CP : 한도 초과인 경우
+            System.out.println("한도 초과입니다.");
+        } else {
+            // 분기 : 0-1-000b-129-card-1A : 한도 초과가 아닌 경우
+            this.history[this.payment_no] = new UseHistoryEntity(payment_title, payment);
+            this.payment_no++;
+
+            // 전체 금액 갱신
+            this.total_amount_used += payment;
+            this.deposit -= payment;
+            System.out.printf("-> %s(%d원) - %s번 체크카드로 결제\n",
+                payment_title,
+                payment,
+                this.GetCardNumber()
+            );
+        }
+        return 0;
+    }
 }
 
 class CardManager {
     Card[] card;
+
     int card_count;
     CardManager(int limit_count){
         this.card_count = 0;
