@@ -187,7 +187,14 @@ class CardManager {
         return;
     }
     void buySomething(String item_title, int item_price, String card_number) {
-        
+        int card_idx = this.searchCard(card_number);
+        if(card_idx != -1){
+            if(item_title.equals("transfee")){
+                this.card[card_idx].payTrans(2800);                
+            }else {
+                this.card[card_idx].payCard(item_title, card_idx);
+            }
+        }
         return;
     }
     void printMenu() {
