@@ -14,6 +14,15 @@ interface Cardable {
     // 카드 사용 내역 출력 메서드
 }
 
+class UseHistoryEntity {
+    String use_history_str;
+    int use_history_int;
+    UseHistoryEntity(String use_history_str, int use_history_int){
+        this.use_history_int = use_history_int;
+        this.use_history_str = use_history_str;
+    }
+}
+
 class Card implements Cardable {
     String card_nickname; 
     // 카드 별칭
@@ -26,10 +35,12 @@ class Card implements Cardable {
     int payment_no;
     // 카드를 몇번 결제했는지
 
-    String[] use_history_str;
+    String use_history_str;
     // 결제 이용 지역
-    int[] use_history_int;
+    int use_history_int;
     // 결제 금액
+
+    UseHistoryEntity[] history;
 
 
     public int payCard(String payment_title, int payment){
