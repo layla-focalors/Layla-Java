@@ -15,6 +15,23 @@ interface Cardable {
 }
 
 class Card implements Cardable {
+    String card_nickname; 
+    // 카드 별칭
+    private String card_number;
+    // 카드 번호
+    String Owner;
+    // 카드 주인
+    int total_amount_used;
+    // 카드에서 사용한 금액의 총합
+    int payment_no;
+    // 카드를 몇번 결제했는지
+
+    String[] use_history_str;
+    // 결제 이용 지역
+    int[] use_history_int;
+    // 결제 금액
+
+
     public int payCard(String payment_title, int payment){
         return 0;
     }
