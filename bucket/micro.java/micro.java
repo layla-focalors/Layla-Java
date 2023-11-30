@@ -41,6 +41,27 @@ class CardManager {
         this.card_count = 0;
         this.card = new Card[limit_count];
     }
+    void CreateCard(int option){
+        // 0신용카드 , 1체크카드
+    }
+    int searchCard(String Card_number){
+        return 0;
+    }
+    void printCardInfo(int card_idx){
+        return;
+    }
+    void buySomething(String item_title, int item_price, String Card_number){
+        return;
+    }
+    void printMenu(){
+        System.out.println("1. 카드 생성");
+        System.out.println("2. 카드 조회");
+        System.out.println("3. 카드 사용");
+        System.out.println("4. 교통카드 사용");
+        System.out.println("0. 종료");
+        System.out.print("입력 : ");
+    }
+
 }
 
 public class micro {
