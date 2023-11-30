@@ -179,12 +179,15 @@ class CardManager {
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
     void printCardInfo(int card_idx){
+        this.card[card_idx].printCardInfo();
+        this.card[card_idx].printCardHistory();
         return;
     }
     void buySomething(String item_title, int item_price, String card_number) {
+        
         return;
     }
     void printMenu() {
