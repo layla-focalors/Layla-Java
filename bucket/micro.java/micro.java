@@ -30,6 +30,7 @@ class Card implements Cardable {
     // 카드 번호
     String Owner;
     // 카드 주인
+    String passwd;
     int total_amount_used;
     // 카드에서 사용한 금액의 총합
     int payment_no;
@@ -41,6 +42,19 @@ class Card implements Cardable {
     // 결제 금액
 
     UseHistoryEntity[] history;
+    // 카드 이용 내역
+
+    Card(String card_nickname, String card_number, String owner, String passwd){
+        this.card_nickname = card_nickname;
+        this.card_number = card_number;
+        this.Owner = owner;
+        this.passwd = passwd;
+
+        this.total_amount_used = 0;
+        this.payment_no = 0;
+        
+        this.history = new UseHistoryEntity[100];
+    }
 
 
     public int payCard(String payment_title, int payment){
