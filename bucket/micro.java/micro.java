@@ -84,12 +84,43 @@ class CreditCard extends Card {
     // 연회비
     int total_trans_fee;
     // 교통카드 비용
+
+    CreditCard(String card_nickname, String card_number, String owner, String passwd, int limit_amount, int annual_fee) {
+        super(card_nickname, card_number, owner, passwd);
+        this.limit_amount = limit_amount;
+        this.annual_fee = annual_fee;
+        this.total_trans_fee = 0;
+    }
+    public int payCard(String payment_title, int payment){return 0;}
+    // 카드 결제 메서드
+    public int payTrans(int fee) {
+        return 0;
+    }
+    public void printCardInfo(){
+    }
+    // 카드의 정보 출력
+    public void printCardHistory(){
+        System.out.println("------------ 카드 정보 출력 내용 ------------");
+        for(int i = 0; i < this.payment_no; i++){
+            System.out.printf("사용내역(%d번째) : [%s][%d원]\n",
+            i + 1,
+            this.history[i].use_history_str,
+            this.history[i].use_history_int
+            );
+        }
+    }
 }
 class CheckCard extends Card {
     int deposit;
     // 계좌 잔액
     int total_trans_fee;
     // 교통카드 비용
+
+    CheckCard(String card_nickname, String card_number, String owner, String passwd, int deposit) {
+        super(card_nickname, card_number, owner, passwd);
+        this.deposit = deposit;
+        this.total_trans_fee = 0;
+    }
 }
 
 class CardManager {
