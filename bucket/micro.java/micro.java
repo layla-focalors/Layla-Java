@@ -157,25 +157,29 @@ class CardManager {
         String nickname, card_number, owner, passwd;
         int limit_amount, annual_fee, deposit;
 
+
         System.out.print("카드 이름 : "); nickname = sc.next();
         System.out.print("카드 번호 : "); card_number = sc.next();
         System.out.print("카드 주인 : "); owner = sc.next();
         System.out.print("카드 암호 : "); passwd = sc.next();
-        
-        if(option == 0){
-            System.out.println("카드 한도 : "); limit_amount = sc.nextInt();
-            System.out.println("카드 연회비 : "); annual_fee = sc.nextInt();
-            this.card[this.card_count++] = new CreditCard(nickname, card_number, owner, passwd, limit_amount, annual_fee); 
-            System.out.println("->카드 생성이 완료되었습니다.");
-        } else if (option == 1){
-            System.out.println("카드 잔약 : "); deposit = sc.nextInt();
-            this.card[this.card_count++] = new CheckCard(nickname, card_number, owner, passwd, deposit); 
-            System.out.println("->카드 생성이 완료되었습니다.");
+
+
+        if(option == 0) {
+            System.out.print("카드 한도 : "); limit_amount = sc.nextInt();
+            System.out.print("카드 연회비 : "); annual_fee = sc.nextInt();
+            this.card[this.card_count++] = new CreditCard
+                (nickname, card_number, owner, passwd, limit_amount, annual_fee);
+            System.out.println("-> 카드 생성이 완료되었습니다.");
+        } else if(option == 1) {
+            System.out.print("카드 잔액 : "); deposit = sc.nextInt();
+            this.card[this.card_count++] = new CheckCard
+                (nickname, card_number, owner, passwd, deposit);
+            System.out.println("-> 카드 생성이 완료되었습니다.");
         }
     }
     int searchCard(String card_number) {
-        for(int i = 0; i < card_count; i ++){
-            if(this.card[i].getCardNumber().equals(card_number)){
+        for(int i=0; i<this.card_count; i++) {
+            if(this.card[i].getCardNumber().equals(card_number)) {
                 return i;
             }
         }
@@ -187,12 +191,12 @@ class CardManager {
         return;
     }
     void buySomething(String item_title, int item_price, String card_number) {
-        int card_idx = this.searchCard(card_number);
-        if(card_idx != -1){
-            if(item_title.equals("transfee")){
-                this.card[card_idx].payTrans(2800);                
-            }else {
-                this.card[card_idx].payCard(item_title, card_idx);
+        int card_index = this.searchCard(card_number);
+        if(card_index != -1) {
+            if(item_title.equals("transfee")) {
+                this.card[card_index].payTrans(2800);
+            } else {
+                this.card[card_index].payCard(item_title, item_price);
             }
         }
         return;
@@ -214,28 +218,48 @@ public class micro {
 
 
         while(true) {
+            String title, card_number;
+            int item_price;
+           
             cm.printMenu();
             choice = sc.nextInt();
 
 
             switch(choice) {
-                case 0:
-                    return;
-                case 1:
-                    System.out.println("카드생성!");
-                    break;
-                case 2:
-                    System.out.println("카드조회!");
-                    break;
-                case 3:
-                    System.out.println("카드사용!");
-                    break;
-                case 4:
-                    System.out.println("교통카드사용!");
-                    break;
-                default:
-                    System.out.println("없는 메뉴입니다.");
-                    break;
+                case 0: // 종료
+                return;
+            case 1:
+                System.out.println("카드생성!");
+                System.out.println("0:신용카드/1:체크카드");
+                System.out.print("카드 선택 : ");
+                cm.createCard(sc.nextInt());
+                break;
+            case 2:
+                System.out.println("카드조회!");
+                System.out.print("조회할 카드 번호 : "); card_number = sc.next();
+                int card_index = cm.searchCard(card_number);
+                if(card_index == -1) {
+                    System.out.println("-> 카드번호가 존재하지 않습니다");
+                } else {
+                    cm.printCardInfo(card_index);
+                }
+                break;
+            case 3:
+                System.out.println("카드사용!");
+                System.out.print("결제 아이템 입력 : "); title = sc.next();
+                System.out.print("결제 금액 입력 : "); item_price = sc.nextInt();
+                System.out.print("결제 카드 번호 입력 : "); card_number = sc.next();
+               
+                cm.buySomething(title, item_price, card_number);
+                break;
+            case 4:
+                System.out.println("교통카드!");
+                System.out.print("결제 카드 번호 입력 : "); card_number = sc.next();
+                cm.buySomething("transfee", 3000, card_number);
+                break;
+            default:
+                System.out.println("존재하지 않는 메뉴입니다!");
+                break;
             }
         }
     }
