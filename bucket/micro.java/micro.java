@@ -154,7 +154,24 @@ class CardManager {
     }
     void createCard(int option) { // 0:신용카드 / 1:체크카드
         Scanner sc = new Scanner(System.in);
+        String nickname, card_number, owner, passwd;
+        int limit_amount, annual_fee, deposit;
+
+        System.out.print("카드 이름 : "); nickname = sc.next();
+        System.out.print("카드 번호 : "); card_number = sc.next();
+        System.out.print("카드 주인 : "); owner = sc.next();
+        System.out.print("카드 암호 : "); passwd = sc.next();
         
+        if(option == 0){
+            System.out.println("카드 한도 : "); limit_amount = sc.nextInt();
+            System.out.println("카드 연회비 : "); annual_fee = sc.nextInt();
+            this.card[this.card_count++] = new CreditCard(nickname, card_number, owner, passwd, limit_amount, annual_fee); 
+            System.out.println("->카드 생성이 완료되었습니다.");
+        } else if (option == 1){
+            System.out.println("카드 잔약 : "); deposit = sc.nextInt();
+            this.card[this.card_count++] = new CheckCard(nickname, card_number, owner, passwd, deposit); 
+            System.out.println("->카드 생성이 완료되었습니다.");
+        }
     }
     int searchCard(String card_number) {
         return 0;
