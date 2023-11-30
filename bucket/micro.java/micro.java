@@ -174,6 +174,11 @@ class CardManager {
         }
     }
     int searchCard(String card_number) {
+        for(int i = 0; i < card_count; i ++){
+            if(this.card[i].getCardNumber().equals(card_number)){
+                return i;
+            }
+        }
         return 0;
     }
     void printCardInfo(int card_idx){
