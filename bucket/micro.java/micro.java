@@ -57,9 +57,7 @@ class Card implements Cardable {
     }
 
 
-    public int payCard(String payment_title, int payment){
-        return 0;
-    }
+    public int payCard(String payment_title, int payment){return 0;}
     // 카드 결제 메서드
     public int payTrans(int fee) {
         return 0;
@@ -68,6 +66,14 @@ class Card implements Cardable {
     }
     // 카드의 정보 출력
     public void printCardHistory(){
+        System.out.println("------------ 카드 정보 출력 내용 ------------");
+        for(int i = 0; i < this.payment_no; i++){
+            System.out.printf("사용내역(%d번째) : [%s][%d원]\n",
+            i + 1,
+            this.history[i].use_history_str,
+            this.history[i].use_history_int
+            );
+        }
     }
 }
 
@@ -85,6 +91,7 @@ class CardManager {
     }
     void CreateCard(int option){
         // 0신용카드 , 1체크카드
+        
     }
     int searchCard(String Card_number){
         return 0;
