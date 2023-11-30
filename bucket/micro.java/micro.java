@@ -78,8 +78,18 @@ class Card implements Cardable {
 }
 
 class CreditCard extends Card {
+    int limit_amount;
+    // 한도 금액
+    int annual_fee;
+    // 연회비
+    int total_trans_fee;
+    // 교통카드 비용
 }
 class CheckCard extends Card {
+    int deposit;
+    // 계좌 잔액
+    int total_trans_fee;
+    // 교통카드 비용
 }
 
 class CardManager {
