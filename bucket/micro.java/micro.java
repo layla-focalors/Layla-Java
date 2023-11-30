@@ -1,5 +1,5 @@
-import javax.smartcardio.Card;
-
+import java.util.Scanner;
+import java.util.*;
 /**
  * Cardable
  */
@@ -61,11 +61,36 @@ class CardManager {
         System.out.println("0. 종료");
         System.out.print("입력 : ");
     }
-
 }
 
 public class micro {
     public static void main(String[] args){
-
+        Scanner sc = new Scanner(System.in);
+        CardManager cm = new CardManager(100);
+        int choice = -1;
+        while(true){
+            cm.printMenu();
+            choice = sc.nextInt();
+            switch(choice){
+                case 0 -> {
+                    return;
+                }
+                case 1 -> {
+                    System.out.println("카드 생성");
+                }
+                case 2 -> {
+                    System.out.println("카드 조회");
+                }
+                case 3 -> {
+                    System.out.println("카드 사용");
+                }
+                case 4 -> {
+                    System.out.println("교통카드 사용");
+                }
+                default -> {
+                    System.out.println("알 수 없는 값입니다.");
+                }
+            }
+        }
     }
 }
